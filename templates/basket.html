@@ -80,7 +80,7 @@
 
         <form action="{% url 'main:search' %}" method="GET">
         <div class="sm:w-[430px] w-full md:hidden flex bg-[#F4F5F6] rounded-[6px] pr-[10px]">
-          <input type="search" placeholder="Tovar nomini kiriting"
+          <input type="search" name="search" placeholder="Tovar nomini kiriting"
             class="w-full py-[11px] pl-[20px] focus:outline-none bg-transparent" />
           <button class="font active:opacity-50">
             <img src="{% static 'img/navbar/search_icon.png' %}" alt="search icon" />

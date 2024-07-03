@@ -31,14 +31,16 @@
           <a href="{% url 'main:home_page' %}">
             <img src="{% static '/img/navbar/site_logo.png' %}" alt="site rasm logo" width="211" height="56" class="flex" />
           </a>
+          <form action="{% url 'main:search' %}" method="GET">
 
           <div class="w-[430px] md:flex hidden bg-[#F4F5F6] rounded-[6px] pr-[10px]">
-            <input type="search" placeholder="Tovar nomini kiriting"
+            <input type="search" name="search" placeholder="Tovar nomini kiriting"
               class="w-full py-[11px] pl-[20px] focus:outline-none bg-transparent" />
             <button class="font active:opacity-50">
               <img src="{% static 'img/navbar/search_icon.png' %}" alt="search icon" />
             </button>
           </div>
+          </form>
         </div>
 
         <div class="md:flex hidden gap-[30px]">
@@ -81,14 +83,16 @@
             <a href="#bog'lanish" class="text-[#1B1D1F]">Bog’lanish</a>
           </li>
         </ul>
+        <form action="{% url 'main:search' %}" method="GET">
 
         <div class="sm:w-[430px] w-full md:hidden flex bg-[#F4F5F6] rounded-[6px] pr-[10px]">
-          <input type="search" placeholder="Tovar nomini kiriting"
+          <input type="search" name="search" placeholder="Tovar nomini kiriting"
             class="w-full py-[11px] pl-[20px] focus:outline-none bg-transparent" />
           <button class="font active:opacity-50">
             <img src="{% static 'img/navbar/search_icon.png' %}" alt="search icon" />
           </button>
         </div>
+        </form>
 
         <a href="{% url 'main:basket_view' %}"
           class="bg-[#F4F5F6] md:flex hidden gap-[10px] items-center rounded-[8px] px-[20px] py-[10px] hover:opacity-65 active:opacity-50">
