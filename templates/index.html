@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asosiy Sahifa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="{% static '/css/main.css' %}" />
+  <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+</head>
+
+<body>
+  <header>
+    <nav class="shadow-md mb-[30px]">
+      <div class="max-w-[1276px] mx-auto px-3 py-2 flex justify-between">
+        <div class="flex justify-between items-center gap-4">
+          <button id="goods_burger" class="w-6 h-6 flex md:hidden items-center justify-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6H20" stroke="#1B1D1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M4 12H20" stroke="#1B1D1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path opacity="0.4" d="M4 18H20" stroke="#1B1D1F" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <a href="{% url 'main:home_page' %}">
+            <img src="{% static '/img/navbar/site_logo.png' %}" alt="site rasm logo" width="211" height="56" class="flex" />
+          </a>
+          <form action="{% url 'main:search' %}" method="GET">
+          <div class="w-[430px] md:flex hidden bg-[#F4F5F6] rounded-[6px] pr-[10px]">
+            <input type="search" name="search" placeholder="Tovar nomini kiriting"
+              class="w-full py-[11px] pl-[20px] focus:outline-none bg-transparent" />
+            <button class="font active:opacity-50">
+              <img src="{% static 'img/navbar/search_icon.png' %}" alt="search icon" />
+            </button>
+          </div>
+          </form>
+
+        </div>
+
+        <div class="md:flex hidden gap-[30px]">
+          <a href="tel:+998987000021"
+            class="lg:w-[196px] max-w-[196px] flex lg:text-[18px] font-medium items-center gap-2 hover:opacity-65 active:opacity-50">
+            <img src="{% static 'img/navbar/phone_icon.png' %}" alt="site rasm phone icon" />
+            <span>+998 98 700 00 21</span>
+          </a>
+          <a href="tel:+998987000021"
+            class="lg:w-[196px] max-w-[196px] flex lg:text-[18px] font-medium items-center gap-2 hover:opacity-65 active:opacity-50">
+            <img src="{% static 'img/navbar/phone_icon.png' %}" alt="site rasm phone icon" />
+            <span>+998 98 700 00 21</span>
+          </a>
+        </div>
+
+        <a href="{% url 'main:basket_view' %}"
+          class="relative md:hidden flex gap-[10px] items-center rounded-[8px] px-[20px] py-[10px] hover:opacity-65 active:opacity-50">
+          <img src="{% static 'img/navbar/bag_icon.png' %}" alt="bag" />
+          <span
+            class="bg-[#FB6019] text-[#fff] absolute top-1 right-3 text-[14px] flex items-center justify-center rounded-[50%] w-[20px] h-[20px]">{{ cart_items }}</span>
+        </a>
+      </div>
+
+      <hr class="border-[#E3E3E8] w-full h-[1px]" />
+      <div class="max-w-[1276px] mx-auto px-3 py-[13px] flex justify-between items-center md:gap-0 gap-[20px]">
+      
+       
+
+        <ul class="hidden md:flex gap-[5px]">
+          <li class="px-[15px] py-[12px] hover:bg-[#F4F5F6] transition-all duration-150 cursor-pointer rounded-[8px]">
+            <a href="https://www.instagram.com/prestigetuning.uz?igsh=OWZqdjdybmZqejRt" class="text-[#1B1D1F]">Tuning xizmatlari</a>
+          </li>
+          <li class="px-[15px] py-[12px] hover:bg-[#F4F5F6] transition-all duration-150 cursor-pointer rounded-[8px]">
+            <a href="{% url 'main:tuning_product' %}" class="text-[#1B1D1F]">Tuning tovarlari</a>
+          </li>
+          <li class="px-[15px] py-[12px] hover:bg-[#F4F5F6] transition-all duration-150 cursor-pointer rounded-[8px]">
+            <a href="#about" class="text-[#1B1D1F]">Biz haqimizda</a>
+          </li>
+          <li class="px-[15px] py-[12px] hover:bg-[#F4F5F6] transition-all duration-150 cursor-pointer rounded-[8px]">
+            <a href="#bog'lanish" class="text-[#1B1D1F]">Bog’lanish</a>
+          </li>
+        </ul>
+
+        <div class="sm:w-[430px] w-full md:hidden flex bg-[#F4F5F6] rounded-[6px] pr-[10px]">
+          <input type="search" placeholder="Tovar nomini kiriting"
+            class="w-full py-[11px] pl-[20px] focus:outline-none bg-transparent" />
+          <button class="font active:opacity-50">
+            <img src="{% static 'img/navbar/search_icon.png' %}" alt="search icon" />
+          </button>
+        </div>
+
+        <a href="{% url 'main:basket_view' %}"
+          class="bg-[#F4F5F6] md:flex hidden gap-[10px] items-center rounded-[8px] px-[20px] py-[10px] hover:opacity-65 active:opacity-50">
+          <img src="{% static 'img/navbar/bag_icon.png' %}" alt="bag" />
+          <span>Savatcha</span>
+          <span
+            class="bg-[#FB6019] text-[#fff] text-[14px] rounded-[50%] flex items-center justify-center w-[20px] h-[20px]">{{ cart_items }}</span>
+        </a>
+      </div>
+    </nav>
+
+    <div id="goods__nav" class="fixed md:hidden duration-300 top-0 w-full bg-white z-[100] pr-5 pl-3 py-5 right-full">
+      <div class="justify-between flex">
+        <button id="goods__close"
+          class="w-8 h-8 active:opacity-80 rounded-full bg-[#FF0000] text-white flex items-center justify-center">
+          <svg class="flex translate-y-[1.4px]" width="25" height="25" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 11L8 7M8 7L4 3M8 7L12 3M8 7L4 11" stroke="currentColor" stroke-width="1.225"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <ul class="flex flex-col gap-4 text-right mb-5">
+          <li>
+            <a href="https://www.instagram.com/prestigetuning.uz?igsh=OWZqdjdybmZqejRt" class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">Tuning
+              xizmatlari</a>
+          </li>
+          <li>
+            <a href="{% url 'main:tuning_product' %}" class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">Tuning
+              tovarlari</a>
+          </li>
+          <li>
+            <a href="#about" class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">Biz
+              haqimizda</a>
+          </li>
+          <li>
+            <a href="#bog'lanish"
+              class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">Bog’lanish</a>
+          </li>
+          <li>
+            <a href="tel:+998 98 700 00 21"
+              class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">+998 98 700 00
+              21</a>
+          </li>
+          <li>
+            <a href="tel:+998 98 700 00 21"
+              class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">+998 98 700 00
+              21</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <a href="{% url 'main:basket_view' %}"
+          class="flex gap-2.5 border border-[#FF0000] justify-center text-[#FF0000] hover:text-white hover:bg-[#FF0000] transition-all uppercase items-center rounded-[8px] px-[20px] py-[10px] hover:opacity-65 active:opacity-50">
+          <span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M5.87402 7L7.40902 14.246C7.62002 15.244 8.54902 15.923 9.56502 15.822L16.381 15.14C17.221 15.056 17.917 14.454 18.122 13.635L19.47 8.243C19.628 7.611 19.151 7 18.5 7H10.187"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M5.874 7L5.224 4H3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M17.1093 19.267C16.9073 19.267 16.7433 19.431 16.7453 19.633C16.7453 19.835 16.9093 19.999 17.1113 19.999C17.3133 19.999 17.4773 19.835 17.4773 19.633C17.4763 19.431 17.3123 19.267 17.1093 19.267"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M8.69675 19.267C8.49475 19.267 8.33075 19.431 8.33275 19.633C8.33075 19.836 8.49575 20 8.69775 20C8.89975 20 9.06375 19.836 9.06375 19.634C9.06375 19.431 8.89975 19.267 8.69675 19.267"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          Savatcha
+        </a>
+      </div>
+    </div>
+
+    <div class="overlay z-[90] md:hidden block"></div>
+
+    <style>
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #221f1fdb;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+      }
+
+      .overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    </style>
+
+    <div class="bg-[#FAFAFD] w-full pb-[5px]">
+      <!-- Slider main container -->
+      <div class="max-w-[1310px] overflow-hidden mx-auto relative">
+        <div class="max-w-[1276px] px-3 mx-auto hidden md:block">
+          <div class="swiper_desktop overflow-hidden relative">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+
+              {% for b in banners %}
+              <div class="swiper-slide bg-[#010101] text-[#fff] rounded-[30px] px-[60px]">
+                <div class="flex justify-between pt-[50px] pb-[10px]">
+                  <div class="max-w-[627px]">
+                    <h1
+                      class="lg:text-[40px] text-[30px] font-bold lg:leading-[55px] leading-[45px] lg:mt-[60px] mt-[40px]">
+                      {{b.name}}
+                      <br /><span class="bg-[#FF0000] rounded-lg px-2">{{b.ceiling}}%</span>
+                      gacha chegirma !
+                    </h1>
+                    <p class="text-[18px] lg:mt-[30px] mt-[0px]">
+                      {{b.description}}.
+                    </p>
+                  </div>
+                  <img width="442" height="358" class="lg:w-[442px] lg:h-[358px] w-[342px] h-[258px]"
+                    src="{% static 'img/swiper/swiper_image_1.png' %}" alt="site rasm " />
+                </div>
+              </div>
+              {% endfor %}
+
+            
+
+            </div>
+
+            <!-- If we need pagination -->
+          </div>
+        </div>
+        <div class="swiper-pagination-new-1"></div>
+        <div class="swiper-button-prev-new-1"></div>
+        <div class="swiper-button-next-new-1"></div>
+      </div>
+
+      <!-- Slider main container -->
+      <div class="relative">
+        <div class="swiper_mobile md:hidden block overflow-hidden relative px-4">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+
+            {% for b in banners %}
+            <div class="swiper-slide">
+              <div
+                class="swiper-slide bg-[##EFEDF8] flex justify-between items-center border-[5px] border-[#45388833] text-[#fff] rounded-[30px] md:px-[60px] pb-[60px] px-[20px] pt-[20px]">
+                <div class="flex justify-between w-full">
+                  <div class="sm:max-w-[268px] max-w-[168px]">
+                    <h2 class="text-[#2E1066] sm:text-[24px] text-[20px] max-sm:text-[16px] mb-[7px]">
+                      {{b.name}}
+                      <span
+                        class="bg-[#fff] px-[10px] shadow-[#fb5b2a60] shadow-lg rounded-lg text-[#FB5C2A]">{{b.ceiling}}% gacha chegirma</span>
+                    </h2>
+                    <p class="text-[#3D3D4B] max-sm:text-[14px]">
+                      {{b.description}}.
+                    </p>
+                  </div>
+                  <img src="{% static 'img/swiper/swiper-mobile/swiper_image_1.png' %}"
+                    class="sm:max-w-[300px] max-sm:max-w-[160px] max-sm:h-[100px]" alt="site rasm swiper" />
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+          
+
+            
+          </div>
+          <!-- If we need pagination -->
+          <div class="swiper-pagination-new-2"></div>
+        </div>
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev-new-2"></div>
+        <div class="swiper-button-next-new-2"></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="pt-9 pb-5 bg-[#FAFAFD]">
+    <div id="category__container"
+      class="max-w-[1292px] px-4 mx-auto border-collapse grid md:grid-cols-3 gap-2.5 md:gap-0 grid-cols-2">
+      <a href="{% url 'main:category' '5d026665a8f94a91bd827fd13d38da80' %}"
+      class="w-full hover:-mb-2 hover:mt-2 hover:-ml-1 hover:z-50 transition-all duration-300 bg-white md:border shadow-md md:py-7 md:px-8 lg:px-9 lg:py-8 md:flex md:gap-7 p-5 rounded-3xl md:rounded-none items-center justify-start"
+      id="category_link">
+     <div class="w-10 h-10 flex">
+       <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <path fill-rule="evenodd" clip-rule="evenodd"
+               d="M30.1962 7.80413C36.3795 13.9875 36.3795 24.0125 30.1962 30.1958C24.0128 36.3791 13.9878 36.3791 7.80448 30.1958C1.62116 24.0125 1.62116 13.9874 7.80448 7.80413C13.9878 1.62081 24.0129 1.62081 30.1962 7.80413Z"
+               stroke="#FF0000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+         <circle cx="19" cy="19" r="5" stroke="#FF0000" stroke-width="2"/>
+         <path d="M23.501 15.5L32.501 9.5" stroke="#FF0000" stroke-width="2"/>
+         <path d="M7.0004 8.50001L15.0009 15.21" stroke="#FF0000" stroke-width="2"/>
+         <path d="M18.7962 23.2025L18.5005 35.5" stroke="#FF0000" stroke-width="2"/>
+       </svg>
+     </div>
+     <div class="flex flex-col">
+       <h3 class="lg:text-base text-[14px] categories__title font-semibold leading-7 text-[#1B1D1F]">
+         Rullar
+       </h3>
+       <span class="text-base font-normal leading-4 text-[#505255]">{{category_product_counts.5d026665a8f94a91bd827fd13d38da80}} mahsulot</span>
+     </div>
+   </a>
+   
+   
+
+      <a href="{% url 'main:category' 'd8303e37ad1f4c75b4be0ead09cde0ae' %}"
+        class="w-full hover:-mb-2 hover:mt-2 hover:-ml-1 hover:z-50 transition-all duration-300 bg-white shadow-md md:py-7 md:px-8 md:border lg:px-9 lg:py-8 md:flex md:gap-7 p-5 rounded-3xl md:rounded-none items-center justify-start">
+        <div class="w-10 h-10 flex">
+          <img src="{% static 'img/goodsPage/categoryesInfo/car.svg' %}" alt="red car icon" />
+        </div>
+        <div class="flex flex-col">
+          <h3 class="lg:text-base text-[14px] categories__title font-semibold leading-7 text-[#1B1D1F]">
+            Salon tuning
+          </h3>
+          <span class="text-base font-normal leading-4 text-[#505255]">
+            {{category_product_counts.d8303e37ad1f4c75b4be0ead09cde0ae}} mahsulot</span>
+        </div>
+      </a>
+      
+      <a href="{% url 'main:category' '771dd7ff8f104028a6e4aa8b387805fc' %}"
+        class="w-full hover:-mb-2 hover:mt-2 hover:-ml-1 hover:z-50 transition-all duration-300 bg-white shadow-md md:py-7 md:px-8 md:border lg:px-9 lg:py-8 md:flex md:gap-7 p-5 rounded-3xl md:rounded-none items-center justify-start">
+        <div class="w-10 h-10 flex">
+          <img src="{% static 'img/goodsPage/categoryesInfo/home.svg' %}" alt="red car icon" />
+        </div>
+        <div class="flex flex-col">
+          <h3 class="lg:text-base text-[14px] categories__title font-semibold leading-7 text-[#1B1D1F]">
+            Shumoizolyatsiya
+          </h3>
+          <span class="text-base font-normal leading-4 text-[#505255]">
+            {{category_product_counts.771dd7ff8f104028a6e4aa8b387805fc}} mahsulot</span>
+        </div>
+      </a>
+      <a href="{% url 'main:category' '8d470ca816304ae8ac87add70621bc07' %}"
+        class="w-full hover:-mb-2 hover:mt-2 hover:-ml-1 hover:z-50 transition-all duration-300 bg-white shadow-md md:py-7 md:px-8 md:border lg:px-9 lg:py-8 md:flex md:gap-7 p-5 rounded-3xl md:rounded-none items-center justify-start">
+        <div class="w-10 h-10 flex">
+          <img src="{% static 'img/goodsPage/categoryesInfo/carDoor.svg' %}" alt="car's door" />
+        </div>
+        <div class="flex flex-col">
+          <h3 class="lg:text-base text-[14px] categories__title font-semibold leading-7 text-[#1B1D1F]">
+            Kuzov uchun
+          </h3>
+          <span class="text-base font-normal leading-4 text-[#505255]">
+            {{category_product_counts.8d470ca816304ae8ac87add70621bc07}} mahsulot</span>
+        </div>
+      </a>
+      <a href="{% url 'main:category' '1405f6bbf0b54b0f8c34eb481d1b7d00' %}"
+        class="w-full hover:-mb-2 hover:mt-2 hover:-ml-1 hover:z-50 transition-all duration-300 bg-white shadow-md md:py-7 md:px-8 md:border lg:px-9 lg:py-8 md:flex md:gap-7 p-5 rounded-3xl md:rounded-none items-center justify-start">
+        <div class="w-10 h-10 flex">
+          <img src="{% static 'img/goodsPage/categoryesInfo/keys.svg' %}" alt="keys" />
+        </div>
+        <div class="flex flex-col">
+          <h3 class="lg:text-base text-[14px] categories__title font-semibold leading-7 text-[#1B1D1F]">
+            Signalizatsiya
+          </h3>
+          <span class="text-base font-normal leading-4 text-[#505255]">
+            {{category_product_counts.1405f6bbf0b54b0f8c34eb481d1b7d00}} mahsulot</span>
+        </div>
+      </a>
+      <a href="{% url 'main:category' '730b2daa734747dd93987062bad5077d' %}"
+        class="w-full hover:-mb-2 hover:mt-2 hover:-ml-1 hover:z-50 transition-all duration-300 bg-white shadow-md md:py-7 md:px-8 md:border lg:px-9 lg:py-8 md:flex md:gap-7 p-5 rounded-3xl md:rounded-none items-center justify-start">
+        <div class="w-10 h-10 flex">
+          <img src="{% static 'img/goodsPage/categoryesInfo/windowCleaner.svg' %}" alt="red car icon" />
+        </div>
+        <div class="flex flex-col">
+          <h3 class="lg:text-base text-[14px] categories__title font-semibold leading-7 text-[#1B1D1F]">
+            Avto oynalar
+          </h3>
+          <span class="text-base font-normal leading-4 text-[#505255]">
+            {{category_product_counts.730b2daa734747dd93987062bad5077d}} mahsulot</span>
+        </div>
+      </a>
+      <a href="{% url 'main:category' '70a15d71f52b470eb243bb019983657b' %}"
+        class="w-full hover:-mb-2 hover:mt-2 hover:-ml-1 hover:z-50 transition-all duration-300 bg-white shadow-md md:py-7 md:px-8 md:border lg:px-9 lg:py-8 md:flex md:gap-7 p-5 rounded-3xl md:rounded-none items-center justify-start">
+        <div class="w-10 h-10 flex">
+          <img src="{% static 'img/goodsPage/categoryesInfo/cleaningTools.svg' %}" alt="cleaning tools" />
+        </div>
+        <div class="flex flex-col">
+          <h3 class="lg:text-base text-[14px] categories__title font-semibold leading-7 text-[#1B1D1F]">
+            Tozalash vositalari
+          </h3>
+          <span class="text-base font-normal leading-4 text-[#505255]">
+            {{category_product_counts.70a15d71f52b470eb243bb019983657b}} mahsulot</span>
+        </div>
+      </a>
+      <a href="{% url 'main:category' 'ffcf11bf33cb43299a48089333a45709' %}"
+        class="w-full hover:-mb-2 hover:mt-2 hover:-ml-1 hover:z-50 transition-all duration-300 bg-white shadow-md md:py-7 md:px-8 md:border lg:px-9 lg:py-8 md:flex md:gap-7 p-5 rounded-3xl md:rounded-none items-center justify-start">
+        <div class="w-10 h-10 flex">
+          <img src="{% static 'img/goodsPage/categoryesInfo/cleaningTools.svg' %}" alt="cleaning tools" />
+        </div>
+        <div class="flex flex-col">
+          <h3 class="lg:text-base text-[14px] categories__title font-semibold leading-7 text-[#1B1D1F]">
+            Avtoximiya
+          </h3>
+          <span class="text-base font-normal leading-4 text-[#505255]">
+            {{category_product_counts.ffcf11bf33cb43299a48089333a45709}} mahsulot</span>
+        </div>
+      </a>
+      <a href="{% url 'main:category' '63ef44e4a81748a98f70695afefe61a2' %}"
+        class="w-full hover:-mb-2 hover:mt-2 hover:-ml-1 hover:z-50 transition-all duration-300 bg-white shadow-md md:py-7 md:px-8 md:border lg:px-9 lg:py-8 md:flex md:gap-7 p-5 rounded-3xl md:rounded-none items-center justify-start">
+        <div class="w-10 h-10 flex">
+          <img src="{% static 'img/goodsPage/categoryesInfo/disks.svg' %}" alt="diska" />
+        </div>
+        <div class="flex flex-col">
+          <h3 class="lg:text-base text-[14px] categories__title font-semibold leading-7 text-[#1B1D1F]">
+            Diskalar
+          </h3>
+          <span class="text-base font-normal leading-4 text-[#505255]">
+            {{category_product_counts.63ef44e4a81748a98f70695afefe61a2}} mahsulot</span>
+        </div>
+      </a>
+      <a href="{% url 'main:category' 'e6b0fc51ef8a493797d92d0c13ffd589' %}"
+        class="w-full hover:-mb-2 hover:mt-2 hover:-ml-1 hover:z-50 transition-all duration-300 bg-white shadow-md md:py-7 md:px-8 md:border px-9 py-7 md:flex md:gap-7 p-5 rounded-3xl md:rounded-none items-center justify-start">
+        <div class="w-10 h-10 flex">
+          <img src="{% static 'img/goodsPage/categoryesInfo/electronics.svg' %}" alt="electronika" />
+        </div>
+        <div class="flex flex-col">
+          <h3 class="lg:text-base text-[14px] categories__title font-semibold leading-7 text-[#1B1D1F]">
+            Elektronika
+          </h3>
+          <span class="text-base font-normal leading-4 text-[#505255]">
+            {{category_product_counts.e6b0fc51ef8a493797d92d0c13ffd589}} mahsulot</span>
+        </div>
+      </a>
+      <a href="{% url 'main:category' '1a2b1661a2c542839fe22dc20e7608f6' %}"
+        class="w-full hover:-mb-2 hover:mt-2 hover:-ml-1 hover:z-50 transition-all duration-300 bg-white shadow-md md:py-7 md:px-8 md:border lg:px-9 lg:py-8 md:flex md:gap-7 p-5 rounded-3xl md:rounded-none items-center justify-start">
+        <div class="w-10 h-10 flex">
+          <img src="{% static 'img/goodsPage/categoryesInfo/lights.svg' %}" alt="lights" />
+        </div>
+        <div class="flex flex-col">
+          <h3 class="lg:text-base text-[14px] categories__title font-semibold leading-7 text-[#1B1D1F]">
+            Yoritgichlar
+          </h3>
+          <span class="text-base font-normal leading-4 text-[#505255]">
+            {{category_product_counts.1a2b1661a2c542839fe22dc20e7608f6}} mahsulot</span>
+        </div>
+      </a>
+      <a href="#" style="
+            background-image: url(../static/img/goodsPage/categoryesInfo/bg.png);
+            background-repeat: no-repeat;
+            background-color: #000000ae;
+            background-size: cover;
+          "
+        class="md:py-5 md:pl-10 md:pr-6 hover:-mb-2 md:flex items-end rounded-3xl md:rounded-none pt-5 pl-5 pr-2.5 pb-2.5 justify-between hover:mt-2 hover:-ml-1 w-full hover:z-50 transition-all duration-300">
+        <div class="md:flex py-1.5 items-center justify-normal gap-5">
+          <img src="{% static 'img/goodsPage/categoryesInfo/humanIcon.svg' %}" alt="icon" />
+          <span class="text-white md:text-2xl text-[18px] leading-[22px] font-medium md:leading-7">Barchasi</span>
+        </div>
+        <div class="w-8 h-8">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25.3337 16H6.66699" stroke="white" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M18.667 22.6667L25.3337 16" stroke="white" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M18.667 9.33331L25.3337 16" stroke="white" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="pt-5 pb-7 bg-[#FCFCFC] relative">
+    <div class="max-w-[1292px] mx-auto px-4">
+      <h2 class="font-medium text-2xl leading-[34px] mb-6 text-[#1B1D1F]">
+        Ko’p sotilayotgan tovarlar
+      </h2>
+      <div class="swiper mySwiper !mb-2.5 md:!hidden">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div style="
+                  background-image: url(../static/img/goodsPage/topSales/background.png);
+                  background-repeat: no-repeat;
+                  background-size: cover;
+                  margin-bottom: 40px;
+                  background-position: 100%;
+                " class="bg-[#5946D7] p-7 rounded-lg">
+              <h3 class="text-white font-medium text-2xl leading-7 mb-[263px]">
+                Gentra OPTRA faralar sotuvda !
+              </h3>
+            </div>
+          </div>
+          {% for item in average_selling_products %}
+          <div class="swiper-slide">
+            <div class="pt-7 pb-6 px-5 bg-white rounded-3xl">
+              <div class="max-w-[240px] mx-auto md:mx-2.5 h-[222px] flex mb-11">
+                <img class="w-full object-cover" src="{{ item.image.url}}" alt="break for malibu" />
+              </div>
+              <h4 class="lg:text-base lg:leading-[22px] leading-[18px] text-[14px]">
+                {{ item.name }}
+              </h4>
+              <div class="flex items-center justify-between">
+                <div class="flex gap-7 items-start">
+                  <span
+                    class="font-medium md:text-[25px] lg:text-[30px] md:leading-[25px] lg:leading-[30px] text-[#1d1b1f]">{{ item.price_int }}$</span>
+                  <del class="text-base text-[#7A7680] leading-5">{{ item.old_price_int }}$</del>
+                </div>
+                <a href="/product/detail"
+                  class="w-10 h-10 hover:bg-[#FF0000] hover:text-white border-2 border-[#ff0000] text-[#FF0000] duration-300 hover:opacity-100 p-2 rounded-md flex items-center justify-center">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M5.87402 7L7.40902 14.246C7.62002 15.244 8.54902 15.923 9.56502 15.822L16.381 15.14C17.221 15.056 17.917 14.454 18.122 13.635L19.47 8.243C19.628 7.611 19.151 7 18.5 7H10.187"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M5.874 7L5.224 4H3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path
+                      d="M17.1093 19.2671C16.9073 19.2671 16.7433 19.4311 16.7453 19.6331C16.7453 19.8351 16.9093 19.9991 17.1113 19.9991C17.3133 19.9991 17.4773 19.8351 17.4773 19.6331C17.4763 19.4311 17.3123 19.2671 17.1093 19.2671"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                      d="M8.69675 19.267C8.49475 19.267 8.33075 19.431 8.33275 19.633C8.33075 19.836 8.49575 20 8.69775 20C8.89975 20 9.06375 19.836 9.06375 19.634C9.06375 19.431 8.89975 19.267 8.69675 19.267"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          
+        </div>
+      </div>
+      <div class="grid md:hidden grid-cols-2 gap-5 items-center">
+        <div class="pr-1 pl-5 py-5" style="
+              background-size: cover;
+              background-position: center center;
+              background-repeat: no-repeat;
+              background-color: #e8edfa;
+            ">
+          <h3 class="font-medium w-full max-w-[129px] text-[#1B1D1F] text-[18px] leading-6 mb-8">
+            Mers rul yangi tovarlar
+          </h3>
+          <button class="py-2 pl-5 pr-1 flex gap-2.5 bg-[#5946D7] rounded-md text-white">
+            Tanlash
+            <div>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 12H5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M14 17L19 12" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M14 7L19 12" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+          </button>
+        </div>
+        <div class="pr-1 pl-5 py-5" style="
+              background-size: cover;
+              background-position: center center;
+              background-repeat: no-repeat;
+              background-color: #e8edfa;
+            ">
+          <h3 class="font-medium w-full max-w-[129px] text-[#1B1D1F] text-[18px] leading-6 mb-8">
+            Anti radar yangi tovarlar
+          </h3>
+          <button class="py-2 pl-5 pr-1 flex gap-2.5 bg-[#5946D7] rounded-md text-white">
+            Tanlash
+            <div>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 12H5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M14 17L19 12" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M14 7L19 12" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+          </button>
+        </div>
+      </div>
+      <div class="md:grid hidden lg:grid-cols-4 md:grid-cols-2 gap-5 mb-14">
+        <a href="#" style="
+              background-image: url(../static/img/goodsPage/topSales/background.png);
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: 100%;
+            " class="w-full hover:opacity-100 p-7 pr-12 rounded-xl">
+          <h3 class="font-bold text-white md:text-xl lg:text-2xl leading-7 mb-[322px]">
+            Gentra OPTRA faralar sotuvda !
+          </h3>
+        </a>
+        {% for item in average_selling_products %}
+        <div class="pt-7 pb-6 px-5 bg-white border rounded-3xl">
+          <div class="max-w-[240px] mx-auto md:mx-2.5 h-[222px] flex mb-11">
+            <img class="w-full object-cover" src="{{ item.image.url}}" alt="break for malibu" />
+          </div>
+          <h4 class="lg:text-base lg:leading-[22px] leading-[18px] text-[14px]">
+            {{ item.name }}
+          </h4>
+          <div class="flex items-center justify-between">
+            <div class="flex gap-7 items-start">
+              <span
+                class="font-medium md:text-[25px] lg:text-[30px] md:leading-[25px] lg:leading-[30px] text-[#1d1b1f]">{{ item.price_int }}$</span>
+              <del class="text-base text-[#7A7680] leading-5">{{ item.old_price_int }}$</del>
+            </div>
+            <a href="{% url 'main:add_to_cart' item.id %}"
+              class="w-10 h-10 hover:bg-[#FF0000] hover:text-white border-2 border-[#ff0000] text-[#FF0000] duration-300 hover:opacity-100 p-2 rounded-md flex items-center justify-center">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M5.87402 7L7.40902 14.246C7.62002 15.244 8.54902 15.923 9.56502 15.822L16.381 15.14C17.221 15.056 17.917 14.454 18.122 13.635L19.47 8.243C19.628 7.611 19.151 7 18.5 7H10.187"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M5.874 7L5.224 4H3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path
+                  d="M17.1093 19.2671C16.9073 19.2671 16.7433 19.4311 16.7453 19.6331C16.7453 19.8351 16.9093 19.9991 17.1113 19.9991C17.3133 19.9991 17.4773 19.8351 17.4773 19.6331C17.4763 19.4311 17.3123 19.2671 17.1093 19.2671"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                  d="M8.69675 19.267C8.49475 19.267 8.33075 19.431 8.33275 19.633C8.33075 19.836 8.49575 20 8.69775 20C8.89975 20 9.06375 19.836 9.06375 19.634C9.06375 19.431 8.89975 19.267 8.69675 19.267"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+
+     
+     
+      </div>
+    </div>
+  </section>
+
+  <section class="max-md:hidden pt-[60px] pb-[60px]">
+    <div class="max-w-[1292px] max-md:hidden mx-auto px-4 grid grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="bg-[#E8ECF9] pl-[30px] relative pt-[30px] pb-[96px] w-full overflow-hidden">
+        <h1 id="rul__title" class="relative z-20 max-w-[232px] mb-5 font-medium text-2xl text-[#1B1D1F] leading-8">
+          Mers rul yangi tovarlar
+        </h1>
+        <a href="{% url 'main:category' '5d026665a8f94a91bd827fd13d38da80' %}" class="bg-[#FF0000] relative z-20 rounded-[2px] py-[9px] pl-5 pr-[10px] font-medium text-base text-white flex items-center gap-[10px] max-w-[127px]">
+          Tanlash
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M14 17L19 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M14 7L19 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+        <img id="rul__img" src="{% static 'img/goodsPage/topSales/1.png' %}" alt="" class="z-10 absolute bottom-0 right-0">
+        <div class="max-w-[390px] w-full bg-[#F8944B] rounded-full h-[390px] absolute bottom-[-226px] right-[-167px]"></div>
+      </div>
+  
+      <!-- Repeat for other product categories -->
+      
+      <div class="bg-[#E8ECF9] pl-[30px] relative pt-[30px] pb-[96px] w-full overflow-hidden">
+        <h1 id="rul__title" class="relative z-20 max-w-[232px] mb-5 font-medium text-2xl text-[#1B1D1F] leading-8">
+          Anti radar yangi tovarlar        </h1>
+        <a href="{% url 'main:category' 'e6b0fc51ef8a493797d92d0c13ffd589' %}" class="bg-[#FF0000] relative z-20 rounded-[2px] py-[9px] pl-5 pr-[10px] font-medium text-base text-white flex items-center gap-[10px] max-w-[127px]">
+          Tanlash
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M14 17L19 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M14 7L19 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+        <img id="rul__img" src="{% static 'img/goodsPage/topSales/2.png' %}" alt="" class="z-10 absolute bottom-0 right-0">
+        <div class="max-w-[390px] w-full bg-[#F8944B] rounded-full h-[390px] absolute bottom-[-226px] right-[-167px]"></div>
+      </div>
+
+  
+  
+      <!-- Add additional product category sections as needed -->
+
+      <div class="bg-[#E8ECF9] pl-[30px] relative pt-[30px] pb-[96px] w-full overflow-hidden">
+        <h1 id="rul__title" class="relative z-20 max-w-[232px] mb-5 font-medium text-2xl text-[#1B1D1F] leading-8">
+          Salon tuning tovarlar
+        </h1>
+        <a href="{% url 'main:category' 'd8303e37ad1f4c75b4be0ead09cde0ae' %}" class="bg-[#FF0000] relative z-20 rounded-[2px] py-[9px] pl-5 pr-[10px] font-medium text-base text-white flex items-center gap-[10px] max-w-[127px]">
+          Tanlash
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M14 17L19 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M14 7L19 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+        <img id="rul__img" src="{% static 'img/goodsPage/topSales/3.png' %}" alt="" class="z-10 absolute bottom-0 right-0">
+        <div class="max-w-[390px] w-full bg-[#F8944B] rounded-full h-[390px] absolute bottom-[-226px] right-[-167px]"></div>
+      </div>
+  
+    </div>
+  </section>
+  
+
+  <section class="py-[30px] bg-[#FCFCFC]">
+    <div class="max-w-[1292px] px-4 mx-auto relative">
+      <h2 class="font-medium text-[24px] leading-8 mb-7">Tavsiya qilamiz</h2>
+      <div class="swiper mySwiper2">
+        <div class="swiper-wrapper">
+          {% for item in recommended_products %}
+          <div class="swiper-slide !border rounded-2xl">
+            <div class="pt-7 pb-6 px-5 bg-white rounded-3xl">
+              <div class="max-w-[240px] mx-auto md:mx-2.5 h-[222px] flex mb-11">
+                <img class="w-full object-cover" src="{% static 'img/goodsPage/describe/stop.png' %}" alt="break for malibu" />
+              </div>
+              <h4 class="lg:text-base lg:leading-[22px] leading-[18px] text-[14px]">
+                {{ item.name }}
+              </h4>
+              <div class="flex items-center justify-between">
+                <div class="flex gap-7 items-start">
+                  <span class="font-medium md:text-[25px] lg:text-[30px] md:leading-[25px] lg:leading-[30px] text-[#1d1b1f]">{{ item.price_int }}$</span>
+                  <del class="text-base text-[#7A7680] leading-5">{{ item.old_price_int }}$</del>
+                </div>
+                <a href="{% url 'main:add_to_cart' item.id %}" class="w-10 h-10 hover:bg-[#FF0000] hover:text-white border-2 border-[#ff0000] text-[#FF0000] duration-300 hover:opacity-100 p-2 rounded-md flex items-center justify-center ">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.87402 7L7.40902 14.246C7.62002 15.244 8.54902 15.923 9.56502 15.822L16.381 15.14C17.221 15.056 17.917 14.454 18.122 13.635L19.47 8.243C19.628 7.611 19.151 7 18.5 7H10.187" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M5.874 7L5.224 4H3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M17.1093 19.2671C16.9073 19.2671 16.7433 19.4311 16.7453 19.6331C16.7453 19.8351 16.9093 19.9991 17.1113 19.9991C17.3133 19.9991 17.4773 19.8351 17.4773 19.6331C17.4763 19.4311 17.3123 19.2671 17.1093 19.2671" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8.69675 19.267C8.49475 19.267 8.33075 19.431 8.33275 19.633C8.33075 19.836 8.49575 20 8.69775 20C8.89975 20 9.06375 19.836 9.06375 19.634C9.06375 19.431 8.89975 19.267 8.69675 19.267" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+          <!-- Repeat other swiper slides as needed -->
+        </div>
+      </div>
+      <button class="navigationBtnL"></button>
+      <button class="navigationBtnR"></button>
+    </div>
+  </section>
+  
+  
+  
+
+  <section class="py-[30px] bg-[#FCFCFC]">
+    <div class="max-w-[1292px] px-4 mx-auto relative">
+      <h2 class="font-medium text-[24px] leading-8 mb-7">Yangi tovarlar</h2>
+      <div class="swiper mySwiper1">
+        <div class="swiper-wrapper">
+          {% for item in new_products%}
+          <div class="swiper-slide border rounded-2xl">
+            <div class="pt-7 pb-6 px-5 bg-white rounded-3xl">
+                <img class="w-full h-full object-cover rounded-3xl" src="{{ item.image.url}}" alt="break for malibu" />
+              
+              <h4 class="text-[14px] leading-[18px] lg:text-base lg:leading-[22px] mb-[8px]">
+                {{ item.name }}
+              </h4>
+              <div class="flex items-center justify-between">
+                <div class="flex items-start gap-7">
+                  <span class="font-medium text-[25px] lg:text-[30px] leading-[25px] lg:leading-[30px] text-[#1d1b1f]">{{ item.price_int }}$</span>
+                  <del class="text-base text-[#7A7680] leading-5">{{ item.old_price_int }}$</del>
+                </div>
+                <a href="{% url 'main:add_to_cart' item.id %}" class="w-[40px] h-[40px] hover:bg-[#FF0000] hover:text-white border-2 border-[#FF0000] text-[#FF0000] duration-300 hover:opacity-100 rounded-md flex items-center justify-center">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.87402 7L7.40902 14.246C7.62002 15.244 8.54902 15.923 9.56502 15.822L16.381 15.14C17.221 15.056 17.917 14.454 18.122 13.635L19.47 8.243C19.628 7.611 19.151 7 18.5 7H10.187" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M5.874 7L5.224 4H3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M17.1093 19.2671C16.9073 19.2671 16.7433 19.4311 16.7453 19.6331C16.7453 19.8351 16.9093 19.9991 17.1113 19.9991C17.3133 19.9991 17.4773 19.8351 17.4773 19.6331C17.4763 19.4311 17.3123 19.2671 17.1093 19.2671" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8.69675 19.267C8.49475 19.267 8.33075 19.431 8.33275 19.633C8.33075 19.836 8.49575 20 8.69775 20C8.89975 20 9.06375 19.836 9.06375 19.634C9.06375 19.431 8.89975 19.267 8.69675 19.267" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+          <!-- Repeat the above swiper-slide for other items -->
+        </div>
+      </div>
+      <button class="navigationBtnL-1"></button>
+      <button class="navigationBtnR-1"></button>
+    </div>
+  </section>
+  
+
+  <section id="about" class="pt-[29px] pb-[22px] md:block hidden bg-[#1B1D1F] text-white">
+    <div class="max-w-[1292px] w-full px-4 mx-auto">
+      <h2 class="font-medium text-2xl leading-[34px] mb-[22px]">
+        Biz haqimizda
+      </h2>
+      <div class="lg:flex items-start justify-between">
+        <div class="max-w-[568px] ml-[64px]">
+          <p class="font-medium text-base leading-[26px]">
+            <span class="font-bold">Prestige Tuning</span> Andijondagi sifatli
+            va tezkor tuning markazlaridan biri hisoblanadi. Markaz quyidagi
+            sifatlari bilan boshqa tuning xizmatlaridan ajralib turadi:
+          </p>
+          <ul class="list-disc ml-[10px] font-medium text-base leading-[26px]">
+            <li>
+              Yiliga
+              <span class="font-bold">10.000 dan ortiq mijozga</span> xizmat
+              ko'rsatadi.
+            </li>
+            <li>
+              Boshqa tuning xizmatlaridan bir
+              <span class="font-bold">necha marotaba</span> tez va sifatli
+              xizmat ko'rsatadi.
+            </li>
+            <li>
+              <span class="font-bold">10 yillik</span> ish tajribasi.
+            </li>
+            <li class="mb-[24px]">
+              <span class="font-bold">Malakali</span> usta va ishchilar ishlaydi.
+            </li>
+
+            <a href="tel:+998712345678"
+              class="inline-block mt-6 px-4 py-2 text-white bg-[#FF0000] border-[#FF0000] border-2 rounded-md hover:bg-transparent hover:text-[#FF0000] hover:border-[#FF0000] transition-all">
+              Bog'lanish
+            </a>
+          </ul>
+        </div>
+        <img src="{% static 'img/goodsPage/describe/aboutUs.png' %}" alt="main.img" class="w-[443px] h-[320px]" />
+      </div>
+    </div>
+</section>  
+
+  
+
+
+  <section id="bog'lanish" class="pt-[22px] md:block hidden pb-[72px]">
+    <div class="max-w-[1292px] mx-auto px-4">
+      <h2 class="font-medium text-2xl leading-[34px] text-[#1B1D1F] mb-[34px]">
+        Manzil va bog'lanish
+      </h2>
+      <div class="flex items-start justify-between">
+        <div class="max-w-[683px] w-full">
+          <p class="font-medium leading-[22px] text-[#1B1D1F] mb-8">
+            <b>Prestige Tuning</b> markazimiz Andijon shahar
+            <b>Mashrab ko'chasi 2B</b> uyda joylashgan. Mo'ljal: Delfin
+            moykasi, Oqshom choyxonasi.
+          </p>
+          <div class="grid grid-cols-1 min-h-[247px] rounded-lg overflow-hidden">
+            <iframe class="w-full min-h-[247px]"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d363.54067254119076!2d72.34279635575227!3d40.750937490184995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bcedd6a16efb51%3A0xde3157b76b87001!2sPrestige%20Tuning!5e0!3m2!1suz!2s!4v1719455446648!5m2!1suz!2s"
+              style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+        <form class="max-w-[450px] w-full py-6 px-7 border rounded-[24px]" action="{% url 'main:support' %}">
+          <div class="flex mb-[15px] items-center justify-between">
+            <h4 class="font-semibold text-[20px] leading-5">
+              Bog'lanish formasi
+            </h4>
+            <button type="button" class="w-[20px] flex bg-[#E3E3E8] rounded-full h-[20px]">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.66699 6.66675L13.3337 13.3334" stroke="#7A7680" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M13.3337 6.66675L6.66699 13.3334" stroke="#7A7680" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+          <label class="flex flex-col mb-5">
+            <span
+              class="font-medium ml-[15px] w-[40px] z-10 mb-[-8px] px-2 text-[14px] leading-[18px] text-[#55556D] bg-white">Ism</span>
+            <input autocomplete="off" name="ism"
+              class="border outline-none rounded-md py-[13px] px-5 text-[18px] font-medium leading-[22px] text-[#1B1D1F]"
+              type="text" name="name"/>
+          </label>
+          <label class="flex flex-col mb-7">
+            <span
+              class="font-medium ml-[15px] w-[57px] text-center z-10 mb-[-8px] text-[14px] leading-[18px] text-[#55556D] bg-white">Telefon</span>
+            <input autocomplete="off" name="tel:"
+              class="border outline-none rounded-md py-[13px] px-5 text-[18px] font-medium leading-[22px] text-[#1B1D1F]"
+              type="tel" name="phone"/>
+          </label>
+          <button
+            class="py-3 px-[72px] w-full rounded-md bg-[#FF0000] text-[18px] leading-[22px] font-medium text-white">
+            Qo'ng'iroq buyurtma qilish
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  {% load static %}
+  <footer>
+      <div class="bg-[#000000] pb-[13px]">
+        <div class="max-w-[1276px] mx-auto px-3 flex justify-center">
+          <div class="flex flex-col items-center border-b-[1px] w-full pb-[8px] mb-[17px] border-b-[#5f5f5f94]">
+            <a href="{% url 'main:home_page' %}">
+              <img src="{% static 'img/footer/footer_logo.png' %}" alt="site rasm footer logo" />
+            </a>
+            <ul class="flex gap-9">
+              <li>
+                <a href="#" target="_blank" class="hover:scale-105 active:opacity-50 active:scale-95">
+                  <img src="{% static 'img/footer/Youtube_white.svg' %}" alt="site icon youtube icon" />
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank" class="hover:scale-105 active:opacity-50 active:scale-95">
+                  <img src="{% static 'img/footer/Instagram_white.svg' %}" alt="site icon youtube icon" />
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank" class="hover:scale-105 active:opacity-50 active:scale-95">
+                  <img src="{% static 'img/footer/Telegram_white.svg' %}" alt="site icon youtube icon" />
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank" class="hover:scale-105 active:opacity-50 active:scale-95">
+                  <img src="{% static 'img/footer/TikTok_white.svg' %}" alt="site icon youtube icon" />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="text-center text-[#fff]">
+          Copyright ©  «Prestige Tuning» 2024. All rights reserved.
+        </p>  
+      </div>
+  </footer>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 1.2,
+      spaceBetween: 30,
+    });
+
+    var swiper = new Swiper(".swiper_desktop", {
+      // Optional parameters
+      direction: "horizontal",
+      loop: true,
+
+      // If we need pagination
+      pagination: {
+        el: ".swiper-pagination-new-1",
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: ".swiper-button-next-new-1",
+        prevEl: ".swiper-button-prev-new-1",
+      },
+
+      // And if we need scrollbar
+      // scrollbar: {
+      //     el: '.swiper-scrollbar',
+      // },
+    });
+
+    var swiper_mobile = new Swiper(".swiper_mobile", {
+      // Optional parameters
+      direction: "horizontal",
+      loop: true,
+      slidesPerView: 1,
+      spaceBetween: 30,
+      // If we need pagination
+      pagination: {
+        el: ".swiper-pagination-new-2",
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: ".swiper-button-next-new-2",
+        prevEl: ".swiper-button-prev-new-2",
+      },
+
+      // And if we need scrollbar
+      // scrollbar: {
+      //     el: '.swiper-scrollbar',
+      // },
+    });
+
+    var swiper = new Swiper(".mySwiper2", {
+      // slidesPerView: 1,
+      spaceBetween: 30,
+      navigation: {
+        nextEl: ".navigationBtnR",
+        prevEl: ".navigationBtnL",
+      },
+      breakpoints: {
+        1024: {
+          slidesPerView: 4,
+        },
+        768: {
+          slidesPerView: 3,
+        },
+      },
+    });
+
+    var swiper = new Swiper(".mySwiper1", {
+      // slidesPerView: 1,
+      spaceBetween: 30,
+      navigation: {
+        nextEl: ".navigationBtnR-1",
+        prevEl: ".navigationBtnL-1",
+      },
+      breakpoints: {
+        1024: {
+          slidesPerView: 4,
+        },
+        768: {
+          slidesPerView: 3,
+        },
+      },
+    });
+  </script>
+  <script src="{% static 'js/delivery.js' %}"></script>
+</body>
+
+</html>

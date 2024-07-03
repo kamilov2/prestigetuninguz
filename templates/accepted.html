@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'src/style.css' %}" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav class="shadow-md mb-[30px]">
+      <div class="max-w-[1276px] mx-auto px-3 py-2 flex justify-between">
+        <div class="flex justify-between items-center gap-4">
+          <button id="goods_burger" class="w-6 h-6 flex md:hidden items-center justify-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6H20" stroke="#1B1D1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M4 12H20" stroke="#1B1D1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path opacity="0.4" d="M4 18H20" stroke="#1B1D1F" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <a href="{% url 'main:home_page' %}">
+            <img src="{% static '/img/navbar/site_logo.png' %}" alt="site rasm logo" width="211" height="56" class="flex" />
+          </a>
+          <form action="{% url 'main:search' %}" method="GET">
+          <div class="w-[430px] md:flex hidden bg-[#F4F5F6] rounded-[6px] pr-[10px]">
+            <input type="search" name="search" placeholder="Tovar nomini kiriting"
+              class="w-full py-[11px] pl-[20px] focus:outline-none bg-transparent" />
+            <button class="font active:opacity-50" type="submit">
+              <img src="{% static 'img/navbar/search_icon.png' %}" alt="search icon" />
+            </button>
+          </div>
+          </form>
+        </div>
+
+        <div class="md:flex hidden gap-[30px]">
+          <a href="tel:+998987000021"
+            class="lg:w-[196px] max-w-[196px] flex lg:text-[18px] font-medium items-center gap-2 hover:opacity-65 active:opacity-50">
+            <img src="{% static 'img/navbar/phone_icon.png' %}" alt="site rasm phone icon" />
+            <span>+998 98 700 00 21</span>
+          </a>
+          <a href="tel:+998987000021"
+            class="lg:w-[196px] max-w-[196px] flex lg:text-[18px] font-medium items-center gap-2 hover:opacity-65 active:opacity-50">
+            <img src="{% static 'img/navbar/phone_icon.png' %}" alt="site rasm phone icon" />
+            <span>+998 98 700 00 21</span>
+          </a>
+        </div>
+
+        <a href="{% url 'main:basket_view' %}"
+          class="relative md:hidden flex gap-[10px] items-center rounded-[8px] px-[20px] py-[10px] hover:opacity-65 active:opacity-50">
+          <img src="{% static 'img/navbar/bag_icon.png' %}" alt="bag" />
+          <span
+            class="bg-[#FB6019] text-[#fff] absolute top-1 right-3 text-[14px] flex items-center justify-center rounded-[50%] w-[20px] h-[20px]">{{ total_items }}</span>
+        </a>
+      </div>
+
+      <hr class="border-[#E3E3E8] w-full h-[1px]" />
+      <div class="max-w-[1276px] mx-auto px-3 py-[13px] flex justify-between items-center md:gap-0 gap-[20px]">
+      
+       
+
+        <ul class="hidden md:flex gap-[5px]">
+          <li class="px-[15px] py-[12px] hover:bg-[#F4F5F6] transition-all duration-150 cursor-pointer rounded-[8px]">
+            <a href="https://www.instagram.com/prestigetuning.uz?igsh=OWZqdjdybmZqejRt" class="text-[#1B1D1F]">Tuning xizmatlari</a>
+          </li>
+          <li class="px-[15px] py-[12px] hover:bg-[#F4F5F6] transition-all duration-150 cursor-pointer rounded-[8px]">
+            <a href="{% url 'main:tuning_product' %}" class="text-[#1B1D1F]">Tuning tovarlari</a>
+          </li>
+          <li class="px-[15px] py-[12px] hover:bg-[#F4F5F6] transition-all duration-150 cursor-pointer rounded-[8px]">
+            <a href="{% url 'main:home_page' %}#about" class="text-[#1B1D1F]">Biz haqimizda</a>
+          </li>
+          <li class="px-[15px] py-[12px] hover:bg-[#F4F5F6] transition-all duration-150 cursor-pointer rounded-[8px]">
+            <a href="{% url 'main:home_page' %}#bog'lanish" class="text-[#1B1D1F]">Bog’lanish</a>
+          </li>
+        </ul>
+
+        <form action="{% url 'main:search' %}" method="GET">
+        <div class="sm:w-[430px] w-full md:hidden flex bg-[#F4F5F6] rounded-[6px] pr-[10px]">
+          <input type="search" placeholder="Tovar nomini kiriting"
+            class="w-full py-[11px] pl-[20px] focus:outline-none bg-transparent" />
+          <button class="font active:opacity-50">
+            <img src="{% static 'img/navbar/search_icon.png' %}" alt="search icon" />
+          </button>
+        </div>
+      </form>
+
+        <a href="{% url 'main:basket_view' %}"
+          class="bg-[#F4F5F6] md:flex hidden gap-[10px] items-center rounded-[8px] px-[20px] py-[10px] hover:opacity-65 active:opacity-50">
+          <img src="{% static 'img/navbar/bag_icon.png' %}" alt="bag" />
+          <span>Savatcha</span>
+          <span
+            class="bg-[#FB6019] text-[#fff] text-[14px] rounded-[50%] flex items-center justify-center w-[20px] h-[20px]">{{total_items}}</span>
+        </a>
+      </div>
+    </nav>
+    <div id="goods__nav" class="fixed md:hidden duration-300 top-0 w-full bg-white z-[100] pr-5 pl-3 py-5 right-full">
+      <div class="justify-between flex">
+        <button id="goods__close"
+          class="w-8 h-8 active:opacity-80 rounded-full bg-[#FF0000] text-white flex items-center justify-center">
+          <svg class="flex translate-y-[1.4px]" width="25" height="25" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 11L8 7M8 7L4 3M8 7L12 3M8 7L4 11" stroke="currentColor" stroke-width="1.225"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <ul class="flex flex-col gap-4 text-right mb-5">
+          <li>
+            <a href="https://www.instagram.com/prestigetuning.uz?igsh=OWZqdjdybmZqejRt" class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">Tuning
+              xizmatlari</a>
+          </li>
+          <li>
+            <a href="{% url 'main:tuning_product' %}" class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">Tuning
+              tovarlari</a>
+          </li>
+          <li>
+            <a href="{% url 'main:home_page' %}#about" class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">Biz
+              haqimizda</a>
+          </li>
+          <li>
+            <a href="{% url 'main:home_page' %}#bog'lanish"
+              class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">Bog’lanish</a>
+          </li>
+          <li>
+            <a href="tel:+998 98 700 00 21"
+              class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">+998 98 700 00
+              21</a>
+          </li>
+          <li>
+            <a href="tel:+998 98 700 00 21"
+              class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">+998 98 700 00
+              21</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <a href="{% url 'main:basket_view' %}"
+          class="flex gap-2.5 border border-[#FF0000] justify-center text-[#FF0000] hover:text-white hover:bg-[#FF0000] transition-all uppercase items-center rounded-[8px] px-[20px] py-[10px] hover:opacity-65 active:opacity-50">
+          <span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M5.87402 7L7.40902 14.246C7.62002 15.244 8.54902 15.923 9.56502 15.822L16.381 15.14C17.221 15.056 17.917 14.454 18.122 13.635L19.47 8.243C19.628 7.611 19.151 7 18.5 7H10.187"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M5.874 7L5.224 4H3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M17.1093 19.267C16.9073 19.267 16.7433 19.431 16.7453 19.633C16.7453 19.835 16.9093 19.999 17.1113 19.999C17.3133 19.999 17.4773 19.835 17.4773 19.633C17.4763 19.431 17.3123 19.267 17.1093 19.267"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M8.69675 19.267C8.49475 19.267 8.33075 19.431 8.33275 19.633C8.33075 19.836 8.49575 20 8.69775 20C8.89975 20 9.06375 19.836 9.06375 19.634C9.06375 19.431 8.89975 19.267 8.69675 19.267"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          savatcha
+        </a>
+      </div>
+    </div>
+
+    <div class="overlay z-[90] md:hidden block"></div>
+
+    <style>
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #221f1fdb;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+      }
+
+      .overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    </style>
+  </header>
+  <section class="pt-[30px] pb-[537px]">
+    <div class="max-w-[604px] px-5 mx-auto text-center">
+      <h1 class="font-semibold text-2xl leading-[34px] text-[#1B1D1F] mb-[18px]">
+        Buyurtmangiz qabul qilindi !
+      </h1>
+      <img src="{% static 'img/page2/1.png' %}" alt="carfast" class="mx-auto w-[150px] h-[150px] mb-[19px]" />
+      <p class="font-medium text-base leading-[22px] text-[#1B1D1F] mb-[19px]">
+        Siz bilan tez orada sotuv menejerimiz bog’lanadi ! Hozircha boshqa
+        tovarlarni ko’rish uchun
+        <span class="font-semibold">Bosh sahifa </span> ga qaytishingiz mumkin
+        !
+      </p>
+      <a href="{% url 'main:home_page' %}"
+        class="pt-[10px] pb-[8px] px-[20px] transition-all rounded-md hover:bg-[white] hover:text-[#2D2D2D] border-2 border-[#2D2D2D] bg-[#2D2D2D] text-[16px] leading-[22px] font-medium text-white">
+        Bosh sahifa
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="bg-[#000000] pb-[13px]">
+      <div class="max-w-[1276px] mx-auto px-3 flex justify-center">
+        <div class="flex flex-col items-center border-b-[1px] w-full pb-[8px] mb-[17px] border-b-[#5f5f5f94]">
+          <a href="{% url 'main:home_page' %}">
+            <img src="{% static 'img/footer/footer_logo.png' %}" alt="site rasm footer logo" />
+          </a>
+          <ul class="flex gap-9">
+            <li>
+              <a href="#" target="_blank" class="hover:scale-105 active:opacity-50 active:scale-95">
+                <img src="{% static 'img/footer/Youtube_white.svg' %}" alt="site icon youtube icon" />
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank" class="hover:scale-105 active:opacity-50 active:scale-95">
+                <img src="{% static 'img/footer/Instagram_white.svg' %}" alt="site icon youtube icon" />
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank" class="hover:scale-105 active:opacity-50 active:scale-95">
+                <img src="{% static 'img/footer/Telegram_white.svg' %}" alt="site icon youtube icon" />
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank" class="hover:scale-105 active:opacity-50 active:scale-95">
+                <img src="{% static 'img/footer/TikTok_white.svg' %}" alt="site icon youtube icon" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <p class="text-center text-[#fff]">
+        Copyright ©  «Prestige Tuning» 2024. All rights reserved.
+      </p>  
+    </div>
+</footer>
+
+  <script type="module">
+    import Swiper from "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs";
+
+    const swiper = new Swiper();
+  </script>
+  <script src="{% static 'js/delivery.js' %}"></script>
+  <script src="{% static 'js/index.js'  %}"></script>
+</body>
+
+</html>

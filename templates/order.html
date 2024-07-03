@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav class="shadow-md mb-[30px]">
+      <div class="max-w-[1276px] mx-auto px-3 py-2 flex justify-between">
+        <div class="flex justify-between items-center gap-4">
+          <button id="goods_burger" class="w-6 h-6 flex md:hidden items-center justify-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6H20" stroke="#1B1D1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M4 12H20" stroke="#1B1D1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path opacity="0.4" d="M4 18H20" stroke="#1B1D1F" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <a href="{% url 'main:home_page' %}">
+            <img src="{% static '/img/navbar/site_logo.png' %}" alt="site rasm logo" width="211" height="56" class="flex" />
+          </a>
+
+          <div class="w-[430px] md:flex hidden bg-[#F4F5F6] rounded-[6px] pr-[10px]">
+            <input type="search" placeholder="Tovar nomini kiriting"
+              class="w-full py-[11px] pl-[20px] focus:outline-none bg-transparent" />
+            <button class="font active:opacity-50">
+              <img src="{% static 'img/navbar/search_icon.png' %}" alt="search icon" />
+            </button>
+          </div>
+        </div>
+
+        <div class="md:flex hidden gap-[30px]">
+          <a href="tel:+998987000021"
+            class="lg:w-[196px] max-w-[196px] flex lg:text-[18px] font-medium items-center gap-2 hover:opacity-65 active:opacity-50">
+            <img src="{% static 'img/navbar/phone_icon.png' %}" alt="site rasm phone icon" />
+            <span>+998 98 700 00 21</span>
+          </a>
+          <a href="tel:+998987000021"
+            class="lg:w-[196px] max-w-[196px] flex lg:text-[18px] font-medium items-center gap-2 hover:opacity-65 active:opacity-50">
+            <img src="{% static 'img/navbar/phone_icon.png' %}" alt="site rasm phone icon" />
+            <span>+998 98 700 00 21</span>
+          </a>
+        </div>
+
+        <a href="{% url 'main:basket_view' %}"
+          class="relative md:hidden flex gap-[10px] items-center rounded-[8px] px-[20px] py-[10px] hover:opacity-65 active:opacity-50">
+          <img src="{% static 'img/navbar/bag_icon.png' %}" alt="bag" />
+          <span
+            class="bg-[#FB6019] text-[#fff] absolute top-1 right-3 text-[14px] flex items-center justify-center rounded-[50%] w-[20px] h-[20px]">{{ cart_items }}</span>
+        </a>
+      </div>
+
+      <hr class="border-[#E3E3E8] w-full h-[1px]" />
+      <div class="max-w-[1276px] mx-auto px-3 py-[13px] flex justify-between items-center md:gap-0 gap-[20px]">
+      
+       
+
+        <ul class="hidden md:flex gap-[5px]">
+          <li class="px-[15px] py-[12px] hover:bg-[#F4F5F6] transition-all duration-150 cursor-pointer rounded-[8px]">
+            <a href="https://instagram.com/@prestigetuninguz" class="text-[#1B1D1F]">Tuning xizmatlari</a>
+          </li>
+          <li class="px-[15px] py-[12px] hover:bg-[#F4F5F6] transition-all duration-150 cursor-pointer rounded-[8px]">
+            <a href="" class="text-[#1B1D1F]">Tuning tovarlari</a>
+          </li>
+          <li class="px-[15px] py-[12px] hover:bg-[#F4F5F6] transition-all duration-150 cursor-pointer rounded-[8px]">
+            <a href="#about" class="text-[#1B1D1F]">Biz haqimizda</a>
+          </li>
+          <li class="px-[15px] py-[12px] hover:bg-[#F4F5F6] transition-all duration-150 cursor-pointer rounded-[8px]">
+            <a href="#bog'lanish" class="text-[#1B1D1F]">Bog’lanish</a>
+          </li>
+        </ul>
+
+        <div class="sm:w-[430px] w-full md:hidden flex bg-[#F4F5F6] rounded-[6px] pr-[10px]">
+          <input type="search" placeholder="Tovar nomini kiriting"
+            class="w-full py-[11px] pl-[20px] focus:outline-none bg-transparent" />
+          <button class="font active:opacity-50">
+            <img src="{% static 'img/navbar/search_icon.png' %}" alt="search icon" />
+          </button>
+        </div>
+
+        <a href="{% url 'main:basket_view' %}"
+          class="bg-[#F4F5F6] md:flex hidden gap-[10px] items-center rounded-[8px] px-[20px] py-[10px] hover:opacity-65 active:opacity-50">
+          <img src="{% static 'img/navbar/bag_icon.png' %}" alt="bag" />
+          <span>Savatcha</span>
+          <span
+            class="bg-[#FB6019] text-[#fff] text-[14px] rounded-[50%] flex items-center justify-center w-[20px] h-[20px]">{{total_items}}</span>
+        </a>
+      </div>
+    </nav>
+
+    <div id="goods__nav" class="fixed md:hidden duration-300 top-0 w-full bg-white z-[100] pr-5 pl-3 py-5 right-full">
+      <div class="justify-between flex">
+        <button id="goods__close"
+          class="w-8 h-8 active:opacity-80 rounded-full bg-[#FF0000] text-white flex items-center justify-center">
+          <svg class="flex translate-y-[1.4px]" width="25" height="25" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 11L8 7M8 7L4 3M8 7L12 3M8 7L4 11" stroke="currentColor" stroke-width="1.225"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <ul class="flex flex-col gap-4 text-right mb-5">
+          <li>
+            <a href="https://instagram.uz/@prestigetuninguz" class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">Tuning
+              xizmatlari</a>
+          </li>
+          <li>
+            <a href="" class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">Tuning
+              tovarlari</a>
+          </li>
+          <li>
+            <a href="./index.html#about" class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">Biz
+              haqimizda</a>
+          </li>
+          <li>
+            <a href="./index.html#bog'lanish"
+              class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">Bog’lanish</a>
+          </li>
+          <li>
+            <a href="tel:+998 98 700 00 21"
+              class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">+998 98 700 00
+              21</a>
+          </li>
+          <li>
+            <a href="tel:+998 98 700 00 21"
+              class="text-black font-medium text-xl hover:text-[#FF0000] transiton-all ">+998 98 700 00
+              21</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <a href="{% url 'main:basket_view' %}"
+          class="flex gap-2.5 border border-[#FF0000] justify-center text-[#FF0000] hover:text-white hover:bg-[#FF0000] transition-all uppercase items-center rounded-[8px] px-[20px] py-[10px] hover:opacity-65 active:opacity-50">
+          <span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M5.87402 7L7.40902 14.246C7.62002 15.244 8.54902 15.923 9.56502 15.822L16.381 15.14C17.221 15.056 17.917 14.454 18.122 13.635L19.47 8.243C19.628 7.611 19.151 7 18.5 7H10.187"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M5.874 7L5.224 4H3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M17.1093 19.267C16.9073 19.267 16.7433 19.431 16.7453 19.633C16.7453 19.835 16.9093 19.999 17.1113 19.999C17.3133 19.999 17.4773 19.835 17.4773 19.633C17.4763 19.431 17.3123 19.267 17.1093 19.267"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M8.69675 19.267C8.49475 19.267 8.33075 19.431 8.33275 19.633C8.33075 19.836 8.49575 20 8.69775 20C8.89975 20 9.06375 19.836 9.06375 19.634C9.06375 19.431 8.89975 19.267 8.69675 19.267"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          savatcha
+        </a>
+      </div>
+    </div>
+
+    <div class="overlay z-[90] md:hidden block"></div>
+
+    <style>
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #221f1fdb;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+      }
+
+      .overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    </style>
+  </header>
+
+  <section class="w-full bg-[#F9F9FB] pt-[30px] pb-[132px]">
+    <div class="max-w-[1284px] mx-auto px-3 lg:flex items-start gap-[20px]">
+      <div class="max-w-[940px] w-full">
+        <h1 class="font-medium text-[24px] mb-[20px]">Buyurtma berish</h1>
+        <div>
+          <div class="bg-[#fff] w-full shadow-lg px-[30px] py-[25px] rounded-[6px] mb-[30px]">
+            <div
+            class="bg-[#F4F5F6] max-w-[336px] rounded-md border border-[#E3E3E8] flex justify-between gap-3 py-1 lg:px-2 px-1">
+            <button id="orderBtn" class="active_button px-5 py-2.5 rounded-md md:text-base text-sm">Yetkazib
+              berish</button>
+            <button id="orderBtn" class="px-5 py-2.5 rounded-md md:text-base text-sm ">Olib
+              ketish</button>
+          </div>
+          </div>
+
+          <form id="order" autocomplete="off" class="bg-[#fff] w-full shadow-lg p-[30px]" action="{% url 'main:delivery' %}" method="POST">
+            {% csrf_token %}
+            <div class="md:mb-[29px] mb-10">
+              <style>
+                .floating-label-group {
+                  position: relative;
+                }
+
+                .floating-label-group input {
+                  outline: none;
+                  transition: border-color 0.2s;
+                }
+
+                .floating-label-group label {
+                  position: absolute;
+                  top: 13px;
+                  left: 1rem;
+                  pointer-events: none;
+                  font-size: 1rem;
+                  transition: all 0.2s;
+                  color: #55556d;
+                }
+
+                .floating-label-group input:focus~label,
+                .floating-label-group input:not(:placeholder-shown)~label {
+                  top: -15px;
+                  left: 0.75rem;
+                  font-size: 0.75rem;
+                  color: #1b1d1f;
+                  padding: 0 4px;
+                  background-color: white;
+                }
+
+                .floating-label-group input:focus~label .star_form,
+                .floating-label-group input:not(:placeholder-shown)~label .star_form {
+                  color: red;
+                }
+              </style>
+              <div>
+                <div class="md:flex items-start justify-between">
+                  <div class="md:mb-0 mb-10">
+                    <h2 class="mb-2.5 text-2xl font-medium">Buyurtmachi</h2>
+                    <div class="floating-label-group">
+                      <input autocomplete="off" type="text" name="name" id="name" placeholder=" " required
+                        class="mb-5 border-[1px] py-[13px] rounded-md lg:w-[400px] md:w-[300px] w-full px-[20px] placeholder-transparent" />
+                      <label class="px-1 bg-white text-[#55556D] text-lg" for="name">Ism 
+                        <span class="star_form">*</span></label>
+                    </div>
+                    <div class="floating-label-group">
+                      <input autocomplete="off" type="tel" name="phone" id="phone" placeholder=" " required
+                        class="mb-5 border-[1px] py-[13px] rounded-md lg:w-[400px] md:w-[300px] w-full px-[20px] placeholder-transparent" />
+                      <label class="px-1 bg-white text-[#55556D] text-lg" for="phone">Telefon raqam <span
+                          class="star_form">*</span></label>
+                    </div>
+                    <script>
+                      document.addEventListener("DOMContentLoaded", () => {
+                        const phoneInput = document.getElementById("phone");
+
+                        phoneInput.addEventListener("focus", () => {
+                          if (!phoneInput.value.startsWith("+998-")) {
+                            phoneInput.value = "+998-";
+                          }
+                        });
+
+                        phoneInput.addEventListener("input", (event) => {
+                          let value = phoneInput.value.replace(/\D/g, ""); 
+                          if (value.startsWith("998")) {
+                            value = value.slice(3);
+                          } else if (value.startsWith("+998")) {
+                            value = value.slice(4);
+                          }
+
+                          const formattedValue = `+998-${value.slice(0, 2)}${value.length > 2 ? "-" : ""
+                            }${value.slice(2, 5)}${value.length > 5 ? "-" : ""
+                            }${value.slice(5, 7)}${value.length > 7 ? "-" : ""
+                            }${value.slice(7, 9)}`;
+
+                          phoneInput.value = formattedValue;
+                        });
+
+                        phoneInput.addEventListener("blur", () => {
+                          if (phoneInput.value === "+998-") {
+                            phoneInput.value = "";
+                          }
+                        });
+                      });
+                    </script>
+                  </div>
+                  <div class="max-w-[300px] w-full md:text-center">
+                    <h2 class="mb-3.75 text-2xl leading-7.5 font-medium">
+                      Buyurtmangiz
+                    </h2>
+                    <hr class="w-full h-0.25 text-[#E3E3E8] mb-5" />
+                    <div class="flex items-center justify-between mb-4.5">
+                      <p class="font-normal text-xl leading-7.5 text-[#1B1D1F]">
+                        Tovarlar
+                      </p>
+                      <p class="font-normal text-xl leading-7.5 text-[#1B1D1F]">
+                        {{ total_items}}
+                      </p>
+                    </div>
+                    <hr class="w-full h-0.25 text-[#E3E3E8] mb-5" />
+                    <div class="flex items-center justify-between">
+                      <p class="font-semibold text-xl leading-7.5 text-[#1B1D1F]">
+                        Jami
+                      </p>
+                      <p class="font-semibold text-xl leading-7.5 text-[#1B1D1F]">
+                        {{ total_price }}$
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="">
+              <div class="max-w-[400px] md:mb-0 mb-5">
+                <h2 class="mb-[11px] leading-[30px] text-[#1B1D1F] text-[24px] font-medium">
+                  Yetkazib berish manzili
+                </h2>
+                <div>
+                  <div class="flex flex-col mb-10">
+                    <div class="floating-label-group">
+                      <input autocomplete="off" type="text" name="city" id="name" placeholder=" " required
+                        class="mb-5 border-[1px] py-[13px] rounded-md lg:max-w-[400px] w-full px-[20px] placeholder-transparent" />
+                      <label class="text-[#55556D] text-lg" for="name">Viloyat/Shahar</label>
+                    </div>
+                    <div class="floating-label-group">
+                      <input autocomplete="off" type="text" name="village" id="name" placeholder=" " required
+                        class="mb-5 border-[1px] py-[13px] rounded-md lg:max-w-[400px] w-full px-[20px] placeholder-transparent" />
+                      <label class="text-[#55556D] text-lg" for="name">Tuman</label>
+                    </div>
+                    <div class="lg:flex items-center gap-5">
+                      <div class="floating-label-group">
+                        <input autocomplete="off" type="text" name="street" id="name" placeholder=" " required
+                          class="mb-5 border-[1px] py-[13px] rounded-md lg:w-[190px] w-full px-[20px] placeholder-transparent" />
+                        <label class="text-[#55556D] text-lg" for="name">Ko’cha</label>
+                      </div>
+                      <div class="floating-label-group">
+                        <input autocomplete="off" type="text" name="home" id="name" placeholder=" " required
+                          class="mb-5 border-[1px] py-[13px] rounded-md lg:w-[190px] w-full px-[20px] placeholder-transparent" />
+                        <label class="text-[#55556D] text-lg" type="number" for="name">Uy</label>
+                      </div>
+                    </div>
+                    <div class="floating-label-group">
+                      <input autocomplete="off" type="text" name="message_for_delivery" id="name" placeholder=" " required
+                        class="mb-5 border-[1px] py-[13px] rounded-md lg:max-w-[400px] w-full px-[20px] placeholder-transparent" />
+                      <label class="text-[#55556D] text-lg" for="name">Kuryerga qo’shimcha ma’lumot</label>
+                    </div>
+                  </div>
+                  <button type="submit"
+                    class="py-4 px-[41px] transition-all rounded-md hover:bg-[white] hover:text-[#FF0000] border-2 border-[#FF0000] bg-[#FF0000] text-[18px] leading-[22px] font-semibold text-white">
+                    Buyurtma berish
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+
+          <div id="order" class="bg-[#fff] hidden w-full shadow-lg  p-[30px]">
+            <div class=" md:mb-[29px] mb-10">
+
+              <style>
+                .floating-label-group {
+                  position: relative;
+                }
+
+                .floating-label-group input {
+                  outline: none;
+                  transition: border-color 0.2s;
+                }
+
+                .floating-label-group label {
+                  position: absolute;
+                  top: 13px;
+                  left: 1rem;
+                  pointer-events: none;
+                  font-size: 1rem;
+                  transition: all 0.2s;
+                  color: #55556d;
+                }
+
+                .floating-label-group input:focus~label,
+                .floating-label-group input:not(:placeholder-shown)~label {
+                  top: -15px;
+                  left: 0.75rem;
+                  font-size: 0.75rem;
+                  color: #1b1d1f;
+                  padding: 0 4px;
+                  background-color: white;
+                }
+
+                .floating-label-group input:focus~label .star_form,
+                .floating-label-group input:not(:placeholder-shown)~label .star_form {
+                  color: red;
+                }
+              </style>
+
+              <form action="{% url 'main:comming' %}" method="POST">
+                {% csrf_token %}
+                <div class="md:flex items-start justify-between">
+                  <div class="md:mb-0 mb-10">
+                    <h2 class="mb-2.5 text-2xl font-medium">Buyurtmachi</h2>
+                    <div class="floating-label-group">
+                      <input autocomplete="off" type="text" name="name" id="name" placeholder=" " required
+                        class="mb-5 border-[1px] py-[13px] rounded-md lg:w-[400px] md:w-[300px] w-full px-[20px] placeholder-transparent" />
+                      <label class="px-1 bg-white text-[#55556D] text-lg" for="name">Ism 
+                        <span class="star_form">*</span></label>
+                    </div>
+                    <div class="floating-label-group">
+                      <input autocomplete="off" type="tel" name="phone" id="phone" placeholder=" " required
+                        class="mb-5 border-[1px] py-[13px] rounded-md lg:w-[400px] md:w-[300px] w-full px-[20px] placeholder-transparent" />
+                      <label class="px-1 bg-white text-[#55556D] text-lg" for="phone">Telefon raqam <span
+                          class="star_form">*</span></label>
+                    </div>
+                    <script>
+                      document.addEventListener("DOMContentLoaded", () => {
+                        const phoneInput = document.getElementById("phone");
+
+                        phoneInput.addEventListener("focus", () => {
+                          if (!phoneInput.value.startsWith("+998-")) {
+                            phoneInput.value = "+998-";
+                          }
+                        });
+
+                        phoneInput.addEventListener("input", (event) => {
+                          let value = phoneInput.value.replace(/\D/g, ""); 
+                          if (value.startsWith("998")) {
+                            value = value.slice(3);
+                          } else if (value.startsWith("+998")) {
+                            value = value.slice(4);
+                          }
+
+                          const formattedValue = `+998-${value.slice(0, 2)}${value.length > 2 ? "-" : ""
+                            }${value.slice(2, 5)}${value.length > 5 ? "-" : ""
+                            }${value.slice(5, 7)}${value.length > 7 ? "-" : ""
+                            }${value.slice(7, 9)}`;
+
+                          phoneInput.value = formattedValue;
+                        });
+
+                        phoneInput.addEventListener("blur", () => {
+                          if (phoneInput.value === "+998-") {
+                            phoneInput.value = "";
+                          }
+                        });
+                      });
+                    </script>
+                  </div>
+                  <div class="max-w-[300px] w-full md:text-center">
+                    <h2 class="mb-3.75 text-2xl leading-7.5 font-medium">
+                      Buyurtmangiz
+                    </h2>
+                    <hr class="w-full h-0.25 text-[#E3E3E8] mb-5" />
+                    <div class="flex items-center justify-between mb-4.5">
+                      <p class="font-normal text-xl leading-7.5 text-[#1B1D1F]">
+                        Tovarlar
+                      </p>
+                      <p class="font-normal text-xl leading-7.5 text-[#1B1D1F]">
+                        {{total_items}}
+                      </p>
+                    </div>
+                    <hr class="w-full h-0.25 text-[#E3E3E8] mb-5" />
+                    <div class="flex items-center justify-between">
+                      <p class="font-semibold text-xl leading-7.5 text-[#1B1D1F]">
+                        Jami
+                      </p>
+                      <p class="font-semibold text-xl leading-7.5 text-[#1B1D1F]">
+                        {{total_price}}$
+                      </p>
+                    </div>
+                  </div>
+                </div>
+          
+            </div>
+            <div class="md:flex items-start justify-between">
+              <div class="max-w-[400px] md:mb-0 mb-5">
+                <h2 class="mb-[11px] leading-[30px] text-[#1B1D1F] text-[24px] font-medium">
+                  Buyurtmachi </h2>
+                <p class="font-medium text-base leading-[24px] mb-[14px] text-[#1B1D1F]">
+                  <span class="font-bold">
+                    Prestige Tuning
+                  </span>
+                  markazimiz Andijon shahar
+                  <span class="font-bold">Mashrab ko’chasi 2B</span>
+                  uyda joylashgan.
+                  Mo’ljal : Delfin moykasi, Oqshom choyxonasi.
+                </p>
+                <p class="font-normal text-base mb-[53px] leading-[20px] text-[#7A7680]">
+                  Du-Shan 10:00 dan 22:00 gacha
+                  <span class="text-[#1B1D1F]">
+                    Ertaga
+                  </span>
+                </p>
+                <button
+                  class="py-4 px-[41px] transition-all rounded-md hover:bg-[white] hover:text-[#FF0000] border-2 border-[#FF0000] bg-[#FF0000] text-[18px] leading-[22px] font-semibold text-white">
+                  Buyurtma berish
+                </button>
+              </div>
+            </form>
+              <div class="md:w-[433px] grid grid-cols-1 w-full h-[200px]">
+                <iframe class="w-full h-full"
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d188.90702036928062!2d72.34233134341241!3d40.750755190879765!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bcedd6a16efb51%3A0xde3157b76b87001!2sPrestige%20Tuning!5e0!3m2!1suz!2sus!4v1719572185313!5m2!1suz!2sus"
+                  width="" height="" style="border:0;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lg:max-w-[300px] lg:text-left text-center pb-[37px] w-full bg-[#fff] pt-[15px] mt-[54px]"
+        style="box-shadow: 0px 5px 15px 0px #0000000d">
+        <h1 class="font-medium leading-[22px] text-[18px] pl-[30px] mb-4">
+          Buyurtma
+        </h1>
+        <hr class="w-full h-[1px] text-[#E3E3E8]" />
+        <div class="mb-[50px]">
+          <div class="flex items-center justify-center gap-[3px]">
+            <img src="{% static 'img/buyurtma_berish/Humo.png' %}" alt="Humo" class="" />
+            <img src="{% static 'img/buyurtma_berish//uzcard.png' %}" alt="uzcard" class="" />
+          </div>
+          <p class="font-normal text-sm pl-[30px] leading-[18px] text-[#7A7680]">
+            To’lovlarni naqd pul va Uzcard , <br />
+            Humo to’lov tizimlari orqali <br />
+            qilishingiz mumkin.
+          </p>
+        </div>
+        <hr class="w-full h-[1px] text-[#E3E3E8]" />
+        <div class="mb-[30px]">
+          <img src="{% static 'img/buyurtma_berish/fast-delivery1.png' %}" alt="car" class="mx-auto" />
+          <p class="font-normal text-sm pl-[30px] leading-[18px] text-[#7A7680]">
+            O’zbekiston bo’ylab tovarlarni 1 kundan 3 kungacha muddatda
+            yetkazib beramiz !
+          </p>
+        </div>
+        <hr class="w-full h-[1px] text-[#E3E3E8] mb-[9px]" />
+        <div class="text-center">
+          <h1 class="font-medium leading-[22px] text-[18px] mb-[15px]">
+            Savollaringiz bormi?
+          </h1>
+          <div class="flex justify-center items-center mx-auto gap-[10px]">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M18.965 16.61L17.792 15.437C17.206 14.851 16.256 14.851 15.671 15.437L14.749 16.359C14.543 16.565 14.231 16.634 13.965 16.517C12.629 15.932 11.309 15.045 10.132 13.868C8.96002 12.696 8.07602 11.382 7.49002 10.051C7.36802 9.776 7.43902 9.453 7.65202 9.24L8.47802 8.414C9.14902 7.743 9.14902 6.794 8.56302 6.208L7.39002 5.035C6.60902 4.254 5.34302 4.254 4.56202 5.035L3.91002 5.686C3.16902 6.427 2.86002 7.496 3.06002 8.556C3.55402 11.169 5.07202 14.03 7.52102 16.479C9.97002 18.928 12.831 20.446 15.444 20.94C16.504 21.14 17.573 20.831 18.314 20.09L18.965 19.439C19.746 18.658 19.746 17.392 18.965 16.61V16.61Z"
+                stroke="#FF0000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path opacity="0.5"
+                d="M13 6.991C14.031 6.977 15.067 7.359 15.854 8.146C16.641 8.933 17.023 9.96901 17.009 11M13 2.964C15.056 2.964 17.113 3.749 18.682 5.318C20.251 6.887 21.036 8.94401 21.036 11"
+                stroke="#FF0000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <a href="tel:+998 98 700 00 21" class="font-medium text-lg leading-[22px] text-[#1B1D1F]">
+              +998 98 700 00 21
+            </a>
+          </div>
+          <div class="flex justify-center items-center mx-auto gap-[10px]">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M18.965 16.61L17.792 15.437C17.206 14.851 16.256 14.851 15.671 15.437L14.749 16.359C14.543 16.565 14.231 16.634 13.965 16.517C12.629 15.932 11.309 15.045 10.132 13.868C8.96002 12.696 8.07602 11.382 7.49002 10.051C7.36802 9.776 7.43902 9.453 7.65202 9.24L8.47802 8.414C9.14902 7.743 9.14902 6.794 8.56302 6.208L7.39002 5.035C6.60902 4.254 5.34302 4.254 4.56202 5.035L3.91002 5.686C3.16902 6.427 2.86002 7.496 3.06002 8.556C3.55402 11.169 5.07202 14.03 7.52102 16.479C9.97002 18.928 12.831 20.446 15.444 20.94C16.504 21.14 17.573 20.831 18.314 20.09L18.965 19.439C19.746 18.658 19.746 17.392 18.965 16.61V16.61Z"
+                stroke="#FF0000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path opacity="0.5"
+                d="M13 6.991C14.031 6.977 15.067 7.359 15.854 8.146C16.641 8.933 17.023 9.96901 17.009 11M13 2.964C15.056 2.964 17.113 3.749 18.682 5.318C20.251 6.887 21.036 8.94401 21.036 11"
+                stroke="#FF0000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <a href="tel:+998 98 700 00 21" class="font-medium text-lg leading-[22px] text-[#1B1D1F]">
+              +998 98 700 00 21
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="bg-[#000000] pb-[13px]">
+      <div class="max-w-[1276px] mx-auto px-3 flex justify-center">
+        <div class="flex flex-col items-center border-b-[1px] w-full pb-[8px] mb-[17px] border-b-[#5f5f5f94]">
+          <a href="{% url 'main:home_page' %}">
+            <img src="{% static 'img/footer/footer_logo.png' %}" alt="site rasm footer logo" />
+          </a>
+          <ul class="flex gap-9">
+            <li>
+              <a href="#" target="_blank" class="hover:scale-105 active:opacity-50 active:scale-95">
+                <img src="{% static 'img/footer/Youtube_white.svg' %}" alt="site icon youtube icon" />
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank" class="hover:scale-105 active:opacity-50 active:scale-95">
+                <img src="{% static 'img/footer/Instagram_white.svg' %}" alt="site icon youtube icon" />
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank" class="hover:scale-105 active:opacity-50 active:scale-95">
+                <img src="{% static 'img/footer/Telegram_white.svg' %}" alt="site icon youtube icon" />
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank" class="hover:scale-105 active:opacity-50 active:scale-95">
+                <img src="{% static 'img/footer/TikTok_white.svg' %}" alt="site icon youtube icon" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <p class="text-center text-[#fff]">
+        Copyright ©  «Prestige Tuning» 2024. All rights reserved.
+      </p>  
+    </div>
+</footer>
+
+  <script type="module">
+    import Swiper from "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs";
+
+    const swiper = new Swiper();
+  </script>
+  <script>
+    let order = document.querySelectorAll('#order')
+    let orderBtns = document.querySelectorAll('#orderBtn')
+    orderBtns.forEach(function(item , index){
+      item.addEventListener('click' , function(){
+      orderBtns.forEach(function(item , index){
+        item.classList.remove("active_button")
+        order[index].classList.add("hidden")
+      })
+        item.classList.add("active_button")
+        order[index].classList.remove("hidden")
+      })
+    })
+  </script>
+  <script src="../js/delivery.js"></script>
+  <script src="../js/index.js"></script>
+</body>
+
+</html>

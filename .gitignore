@@ -1,0 +1,87 @@
+# Системные файлы операционных систем
+.DS_Store
+Thumbs.db
+
+# Python файлы
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+
+# Лог файлы
+*.log
+
+# Секретные ключи и конфигурационные файлы
+.env
+*.env
+*.local
+
+# Папки виртуальных окружений
+venv/
+env/
+ENV/
+.venv/
+.virtualenv/
+
+# Папка настроек для редакторов и IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Папки и файлы с данными базы данных
+*.sqlite3
+
+# Файлы миграций
+*/migrations/*.py
+*/migrations/*.pyc
+!*/migrations/__init__.py
+
+
+
+# Файлы с компилированным фронтендом
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Кэш-файлы pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Кэш-файлы mypy
+.mypy_cache/
+
+# Файлы, созданные при работе с docker
+docker-compose.override.yml
+.docker/
+
+# pyenv
+.python-version
+
+# coverage
+htmlcov/
+.coverage
+.tox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Celery task queue
+celerybeat-schedule
+celerybeat.pid
+
+# Django static files and media
+static/
+media/
+
+# Pyre type checker
+.pyre/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# MacOS Specific
+*.DS_Store
